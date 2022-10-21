@@ -9,6 +9,6 @@ resource "helm_release" "cert_manager" {
     value = "true"
   }
   depends_on = [
-    null_resource.wait_for_ingress_nginx
+    helm_release.ingress_nginx
   ]
 }
