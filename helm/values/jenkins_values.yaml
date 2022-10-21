@@ -1,0 +1,18 @@
+controller:
+  ingress:
+    enabled: true
+    hostName: ${hostname}
+    annotations:
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+  JCasC:
+    securityRealm: |-
+      local:
+        allowsSignup: false
+        enableCaptcha: false
+        users:
+        - id: "admin"
+          name: "Jenkins Admin"
+          password: "${password}"
+    authorizationStrategy: |-
+      loggedInUsersCanDoAnything:
+        allowAnonymousRead: false
