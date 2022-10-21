@@ -14,7 +14,7 @@ resource "helm_release" "rancher" {
   }
   set {
     name  = "bootstrapPassword"
-    value = var.rancher_bootstrapPassword
+    value = var.password
   }
   depends_on = [
     helm_release.cert_manager

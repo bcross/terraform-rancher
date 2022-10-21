@@ -21,7 +21,7 @@ variable "hostname" {
   default = "127.0.0.1.sslip.io"
 }
 
-variable "rancher_bootstrapPassword" {
+variable "password" {
   type    = string
   default = "M7wLtGyE"
 }
