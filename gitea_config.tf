@@ -19,5 +19,5 @@ resource "null_resource" "rancher_git" {
         EOF
     }
 
-    depends_on = [helm_release.gitea]
+    depends_on = [helm_release.jenkins]
 }
