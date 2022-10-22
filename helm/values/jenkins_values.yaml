@@ -6,7 +6,7 @@ controller:
     annotations:
     hostName: ${hostname}
     path: /jenkins
-  installPlugins: [kubernetes,workflow-aggregator,git,configuration-as-code,gitea,terraform]
+  installPlugins: [kubernetes,workflow-aggregator,git,configuration-as-code,gitea]
   JCasC:
     securityRealm: |-
       local:
