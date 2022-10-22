@@ -1,0 +1,25 @@
+ingress:
+  enabled: true
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  hosts:
+  - host: ${hostname}
+    paths:
+    - path: /gitea(/|$)(.*)
+      pathType: Prefix
+gitea:
+  admin:
+    password: ${password}
+  config:
+    database:
+      DB_TYPE: sqlite3
+    service:
+      DISABLE_REGISTRATION: true
+    server:
+      ROOT_URL: https://${hostname}/gitea
+memcached:
+  enabled: false
+postgresql:
+  enabled: false
