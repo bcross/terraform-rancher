@@ -1,9 +1,10 @@
 controller:
+  jenkinsUriPrefix: /jenkins
   ingress:
     enabled: true
-    hostName: ${hostname}
     annotations:
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    path: /jenkins
   JCasC:
     securityRealm: |-
       local:
