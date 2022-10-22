@@ -1,10 +1,12 @@
 controller:
+  jenkinsUrlProtocol: http
   jenkinsUriPrefix: /jenkins
   ingress:
     enabled: true
     annotations:
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    hostName: ${hostname}
     path: /jenkins
+  installPlugins: [kubernetes,workflow-aggregator,git,configuration-as-code,gitea]
   JCasC:
     securityRealm: |-
       local:
@@ -17,3 +19,22 @@ controller:
     authorizationStrategy: |-
       loggedInUsersCanDoAnything:
         allowAnonymousRead: false
+    configScripts:
+      gitea-creds: |
+        credentials:
+          system:
+            domainCredentials:
+              - credentials:
+                - usernamePassword:
+                    scope: SYSTEM
+                    id: gitea
+                    username: gitea_admin
+                    password: "${password}"
+      gitea: |
+        unclassified:
+          giteaServers:
+            servers:
+            - credentialsId: gitea
+              displayName: gitea
+              manageHooks: true
+              serverUrl: http://gitea-http.default.svc.cluster.local:3000
