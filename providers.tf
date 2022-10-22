@@ -1,5 +1,9 @@
 terraform {
   required_providers {
+    gitea = {
+      source = "Lerentis/gitea"
+    }
+
     kind = {
       source = "kyma-incubator/kind"
     }
@@ -12,6 +16,12 @@ terraform {
       source = "hashicorp/null"
     }
   }
+}
+
+provider "gitea" {
+  base_url = "http://${var.hostname}/gitea"
+  username = "gitea_admin"
+  password = var.password
 }
 
 provider "kind" {
