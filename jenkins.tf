@@ -7,7 +7,5 @@ resource "helm_release" "jenkins" {
 
   values = [templatefile("./helm/values/jenkins_values.yaml", { password = var.password, hostname = var.hostname })]
 
-  depends_on = [
-    helm_release.cert_manager
-  ]
+  depends_on = [helm_release.cert_manager]
 }
