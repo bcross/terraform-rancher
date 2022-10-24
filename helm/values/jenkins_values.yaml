@@ -6,7 +6,7 @@ controller:
     annotations:
     hostName: ${hostname}
     path: /jenkins
-  installPlugins: [kubernetes,workflow-aggregator,git,configuration-as-code,gitea]
+  installPlugins: [kubernetes,workflow-aggregator,git,configuration-as-code,gitea,terraform]
   JCasC:
     securityRealm: |-
       local:
@@ -26,7 +26,7 @@ controller:
             domainCredentials:
               - credentials:
                 - usernamePassword:
-                    scope: SYSTEM
+                    scope: GLOBAL
                     id: gitea
                     username: gitea_admin
                     password: "${password}"
@@ -38,3 +38,15 @@ controller:
               displayName: gitea
               manageHooks: true
               serverUrl: http://gitea-http.default.svc.cluster.local:3000
+                    terraform: |
+      terraform: |  
+        tool:
+          terraform:
+            installations:
+              - name: "terraform"
+                home: "/terraform-1.3.3"
+                properties:
+                  - installSource:
+                      installers:
+                        - terraformInstaller:
+                            id: "1.3.3-linux-amd64"
