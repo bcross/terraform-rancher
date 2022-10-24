@@ -1,0 +1,19 @@
+pipline {
+    agent: any
+
+    stages{
+        stage('Terraform Plan') { 
+            steps {
+                sh 'terraform plan -no-color -out=create.tfplan' 
+            }
+        }
+        // Optional wait for approval
+        input 'Deploy stack?'
+
+        stage ('Terraform Apply') {
+            steps {
+                sh "terraform apply -auto-approve"
+            }
+        }
+    }
+}
